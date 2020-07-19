@@ -25,8 +25,7 @@ def get_weather(city):
         temp_celsius = temp_kelvin - 273.15
         temp_fahrenheit = (temp_kelvin - 273.15)*9/5+32
         weather = json['weather'][0]['main']
-        icon = json['weather'][0]['icon']
-        final = (city,country,temp_kelvin,temp_celsius,temp_fahrenheit,weather,icon)
+        final = (city,country,temp_kelvin,temp_celsius,temp_fahrenheit,weather)
         return final
     else:
         return None
@@ -42,7 +41,6 @@ def search():
         tempc_entry.insert(15,str('{:.2f}°C'.format(weather[3])))
         tempf_entry.insert(15,str('{:.2f}°F'.format(weather[4])))
         weather_entry.insert(15,str('{}'.format(weather[5])))
-        image["bitmap"]='weather_icons/{}@2x.png'.format(weather[6])
     else:
         messagebox.showerror("Error","city not found {}".format(city))
 
@@ -71,9 +69,6 @@ location_label = Label(app,text="LOCATION :",font =("Comic Sans Ms",10,"bold"),f
 location_label.place(x=220,y=130)
 location_entry = Entry(app)
 location_entry.place(x=350,y=130)
-
-image = Label(app,bitmap='')
-image.place(x=550,y=150)
 
 temp_label = Label(app, text="TEMP IN °K :",font =("Comic Sans Ms",10,"bold"),fg = "green")
 temp_label.place(x=220,y=170)
